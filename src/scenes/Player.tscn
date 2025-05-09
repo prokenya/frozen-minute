@@ -1,0 +1,62 @@
+[gd_scene load_steps=9 format=3 uid="uid://cmvc06y2047bi"]
+
+[ext_resource type="Texture2D" uid="uid://bh7dg03k7rf0q" path="res://assets/textures/sprites/penguin.png" id="1_0wdt2"]
+[ext_resource type="Script" uid="uid://b0fvpjajfw065" path="res://src/scripts/Player.cs" id="1_v14g5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v14g5"]
+size = Vector2(22, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7x01q"]
+atlas = ExtResource("1_0wdt2")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qfal1"]
+atlas = ExtResource("1_0wdt2")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gjb54"]
+atlas = ExtResource("1_0wdt2")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1g466"]
+atlas = ExtResource("1_0wdt2")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_uo3qh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7x01q")
+}],
+"loop": true,
+"name": &"Forward",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qfal1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gjb54")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1g466")
+}],
+"loop": true,
+"name": &"Walk",
+"speed": 12.0
+}]
+
+[node name="player" type="CharacterBody2D"]
+script = ExtResource("1_v14g5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_v14g5")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_uo3qh")
+animation = &"Walk"

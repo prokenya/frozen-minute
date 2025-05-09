@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://bd4ap6nx0idrg"]
+
+[ext_resource type="Script" uid="uid://bcmwu4dedi02m" path="res://src/scripts/Main.cs" id="1_x4os5"]
+[ext_resource type="PackedScene" uid="uid://bt14sn6r2qab2" path="res://src/scenes/Gui.tscn" id="2_8oy5r"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_x4os5")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="GUI" parent="CanvasLayer" instance=ExtResource("2_8oy5r")]
+
+[node name="Transition" type="ColorRect" parent="CanvasLayer"]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0)
