@@ -28,24 +28,31 @@ public partial class Player : CharacterBody2D
 	}
 	private PlayerState currentState = PlayerState.Idle;
 
-
+	private Timer CoyoteTimer;
+	private bool CanJump = true;
 	private AnimatedSprite2D sprite;
 
     public override void _Ready()
     {
 		Global.player = this;
 		sprite = GetNode<AnimatedSprite2D>("%AnimatedSprite2D");
+		CoyoteTimer = GetNode<Timer>("%CoyoteTimer");
     }
 	public override void _PhysicsProcess(double delta)
 	{
+
 		if (!IsOnFloor())
 		{
 			Velocity += GetGravity() * (float)delta;
-		}
+			if (CoyoteTimer.IsStopped() && CanJump)
+				CoyoteTimer.Start();
+		}else{CoyoteTimer.Stop();CanJump = true;}
 
-		if (Input.IsActionJustPressed("ui_accept") && IsOnFloor())
+		if (Input.IsActionJustPressed("ui_accept") && CanJump)
 		{
 			Velocity = new Vector2(Velocity.X, JumpVelocity);
+			CoyoteTimer.Stop();
+			CanJump = false;
 
 		}
 
@@ -85,6 +92,10 @@ public partial class Player : CharacterBody2D
 			break;
     }
 	}
+	private void _CoyoteTimeout(){
+		CanJump = false;
+	}
+
 
 }
 

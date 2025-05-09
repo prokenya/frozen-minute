@@ -60,3 +60,9 @@ unique_name_in_owner = true
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_uo3qh")
 animation = &"Walk"
+
+[node name="CoyoteTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 0.1
+
+[connection signal="timeout" from="CoyoteTimer" to="." method="_CoyoteTimeout"]
