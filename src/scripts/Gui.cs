@@ -11,14 +11,12 @@ public partial class Gui : Control
 	private Button exit;
 	private Tween _tween;
 	private PanelContainer menu;
-	private TileMapLayer background;
 	public override void _Ready()
 	{
 		Global.gui = this;
 		play = GetNode<Button>("%Play");
 		exit = GetNode<Button>("%Exit");
 		menu = GetNode<PanelContainer>("%MainMenu");
-		background = GetNode<TileMapLayer>("%BG");
 		transition = GetNode<ColorRect>("%Transition");
 
 		time = GetNode<Label>("%Time");
@@ -30,7 +28,6 @@ public partial class Gui : Control
 		menu.Hide();
 		// Global.Main.SpawnPlayer();
 		await SetTransition(true,1);
-		background.QueueFree();
 		Global.player.Camera.Enabled = true;
 		await Global.GlobalNode.ChangeWorld("res://src/scenes/World1.tscn",false);
 		await SetTransition(false,1);

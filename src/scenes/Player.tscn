@@ -79,5 +79,9 @@ script = ExtResource("3_7x01q")
 position = Vector2(0, 24)
 shape = SubResource("RectangleShape2D_v14g5")
 
+[node name="ReloadTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true
+
 [connection signal="timeout" from="CoyoteTimer" to="." method="_CoyoteTimeout"]
 [connection signal="body_shape_entered" from="Area2D" to="Area2D" method="_BodyShapeEntered"]
