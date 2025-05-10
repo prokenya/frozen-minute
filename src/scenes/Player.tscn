@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://cmvc06y2047bi"]
+[gd_scene load_steps=11 format=3 uid="uid://cmvc06y2047bi"]
 
 [ext_resource type="Texture2D" uid="uid://bh7dg03k7rf0q" path="res://assets/textures/sprites/penguin.png" id="1_0wdt2"]
 [ext_resource type="Script" uid="uid://b0fvpjajfw065" path="res://src/scripts/Player.cs" id="1_v14g5"]
+[ext_resource type="Script" uid="uid://d2dwk6i4e0d1m" path="res://src/scripts/FloorDetector.cs" id="3_7x01q"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_v14g5"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7x01q"]
 size = Vector2(22, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7x01q"]
@@ -47,13 +48,19 @@ animations = [{
 "speed": 12.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v14g5"]
+size = Vector2(4, 4)
+
 [node name="player" type="CharacterBody2D"]
+texture_filter = 1
 script = ExtResource("1_v14g5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_v14g5")
+shape = SubResource("RectangleShape2D_7x01q")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+unique_name_in_owner = true
+position_smoothing_speed = 1.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
@@ -65,4 +72,12 @@ animation = &"Walk"
 unique_name_in_owner = true
 wait_time = 0.1
 
+[node name="Area2D" type="Area2D" parent="."]
+script = ExtResource("3_7x01q")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 24)
+shape = SubResource("RectangleShape2D_v14g5")
+
 [connection signal="timeout" from="CoyoteTimer" to="." method="_CoyoteTimeout"]
+[connection signal="body_shape_entered" from="Area2D" to="Area2D" method="_BodyShapeEntered"]

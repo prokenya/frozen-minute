@@ -2,23 +2,11 @@ using Godot;
 using System;
 
 public partial class Player : CharacterBody2D
-{
+{	
+	const float MIN_MOVE_SPEED = 2.0f;
 	public int JumpVelocity = -300;
-	public int Speed = 100;
-
-	private bool _isFreezed;
-	public bool IsFreezed
-	{
-	    get { return _isFreezed; }
-	    set
-	    {
-	        _isFreezed = value;
-			if (_isFreezed){ProcessMode = ProcessModeEnum.Disabled;}
-			else{ProcessMode = ProcessModeEnum.Inherit;}
-	    }
-	}
-
-
+	public int Speed = 200;
+	public float SlipFriction = 1;
 	public enum PlayerState 
 	{
     Idle,
@@ -26,6 +14,8 @@ public partial class Player : CharacterBody2D
     Walking,
     Jumping,
 	}
+	public Camera2D Camera;
+
 	private PlayerState currentState = PlayerState.Idle;
 
 	private Timer CoyoteTimer;
@@ -37,6 +27,7 @@ public partial class Player : CharacterBody2D
 		Global.player = this;
 		sprite = GetNode<AnimatedSprite2D>("%AnimatedSprite2D");
 		CoyoteTimer = GetNode<Timer>("%CoyoteTimer");
+		Camera =  GetNode<Camera2D>("%Camera2D");
     }
 	public override void _PhysicsProcess(double delta)
 	{
@@ -59,22 +50,39 @@ public partial class Player : CharacterBody2D
 		if (Input.IsActionPressed("ui_down")){
 			ChangeState(PlayerState.lookForward);
 		}
-		float direction = Input.GetAxis("ui_left","ui_right");
-		if (direction != 0){
-			ChangeState(PlayerState.Walking);
-			sprite.FlipH = direction >0;
-			Velocity = new Vector2(direction * Speed,Velocity.Y);
-		}
-		else{
-			Velocity = new Vector2(Mathf.MoveToward(Velocity.X,0,Speed), Velocity.Y);
-			if (currentState != PlayerState.lookForward){
-			ChangeState(PlayerState.Idle);
-			}
+		float direction = Input.GetAxis("ui_left", "ui_right");
+		float targetSpeed = direction * Speed;
 
+		Velocity = new Vector2(
+			Mathf.Lerp(Velocity.X, targetSpeed, SlipFriction),
+			Velocity.Y
+		);
+
+		if (direction != 0)
+		{
+			ChangeState(PlayerState.Walking);
+			sprite.FlipH = direction > 0;
 		}
+		else
+		{
+			if (currentState != PlayerState.lookForward)
+				ChangeState(PlayerState.Idle);
+		}
+		if (Mathf.Abs(Velocity.X) < MIN_MOVE_SPEED)
+		{Velocity = new Vector2(0, Velocity.Y);}
+		// else{
+		// 	Velocity = new Vector2(Mathf.MoveToward(Velocity.X,0,Speed), Velocity.Y);
+		// 	if (currentState != PlayerState.lookForward){
+		// 	ChangeState(PlayerState.Idle);
+		// 	}
+
 
 		MoveAndSlide();
 		HandleAnimation();
+	}
+
+	public void ThrowSnowball(){
+		
 	}
 	private void ChangeState(PlayerState newState) {
     currentState = newState;

@@ -20,19 +20,21 @@ public partial class Global : Node
         Tree = GetTree();
         GlobalNode = this;
     }
-    public async Task ChangeWorld(string scenePath)
+    public async Task ChangeWorld(string scenePath,bool WithTransition = true)
     {
-
+        Main.StopTimer();
 		IsGameOver = false;
-        player.IsFreezed = true;
-        await gui.SetTransition(true);
+        Main.IsFreezed = true;
+        if (WithTransition){await gui.SetTransition(true);}
         await ToSignal(GetTree(), "process_frame");
         PackedScene scene = ResourceLoader.Load<PackedScene>(scenePath);
         World instance = (World)scene.Instantiate();
         if (CurrentWorld != null){CurrentWorld.QueueFree();}
         Main.AddChild(instance);
-        player.IsFreezed = false;
-        await gui.SetTransition(false);
+        player.Position = new Vector2(0,0);
+        Main.IsFreezed = false;
+        if (WithTransition){await gui.SetTransition(false);}
+
 
 
     }

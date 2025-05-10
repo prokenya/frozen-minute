@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cmrcnpksuewbu"]
+
+[sub_resource type="SeparationRayShape2D" id="SeparationRayShape2D_me7fx"]
+
+[node name="icicle" type="RigidBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("SeparationRayShape2D_me7fx")

@@ -5,28 +5,37 @@ using System.Threading.Tasks;
 
 public partial class Gui : Control
 {
-	public Button play;
-	public ColorRect transition;
+	public Label time;
+	private Button play;
+	private ColorRect transition;
+	private Button exit;
 	private Tween _tween;
 	private PanelContainer menu;
-
-	public Button exit;
+	private TileMapLayer background;
 	public override void _Ready()
 	{
 		Global.gui = this;
 		play = GetNode<Button>("%Play");
 		exit = GetNode<Button>("%Exit");
 		menu = GetNode<PanelContainer>("%MainMenu");
+		background = GetNode<TileMapLayer>("%BG");
 		transition = GetNode<ColorRect>("%Transition");
+
+		time = GetNode<Label>("%Time");
 	}
 
 	public async void _Play(){
 		play.Hide();
 		exit.Show();
 		menu.Hide();
-		Global.Main.SpawnPlayer();
-		await Global.GlobalNode.ChangeWorld("res://src/scenes/World1.tscn");
+		// Global.Main.SpawnPlayer();
+		await SetTransition(true,1);
+		background.QueueFree();
+		Global.player.Camera.Enabled = true;
+		await Global.GlobalNode.ChangeWorld("res://src/scenes/World1.tscn",false);
+		await SetTransition(false,1);
 	}
+
 	public async Task SetTransition(bool Start,double duration = 1){
 		if (_tween != null){
         	_tween.Kill();
@@ -48,7 +57,7 @@ public partial class Gui : Control
 	{
 	    if (Input.IsActionJustPressed("ui_cancel")){
 			menu.Visible = !menu.Visible;
-			Global.player.IsFreezed = menu.Visible;
+			Global.Main.IsFreezed = menu.Visible;
 		}
 	}
 	public async void _Exit(){
@@ -62,4 +71,7 @@ public partial class Gui : Control
 
 	}
 
+	public void SetTime(double timesec){
+		time.Text = $"TimeLeft: {timesec}";
+	}
 }

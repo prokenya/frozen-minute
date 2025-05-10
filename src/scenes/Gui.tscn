@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bt14sn6r2qab2"]
 
-[ext_resource type="Theme" uid="uid://0qrpmun6dubf" path="res://src/DOTtres/MainTheme.tres" id="1_gkjl5"]
+[ext_resource type="Theme" uid="uid://0qrpmun6dubf" path="res://src/tres/MainTheme.tres" id="1_gkjl5"]
 [ext_resource type="Script" uid="uid://blaih3he6er5t" path="res://src/scripts/Gui.cs" id="2_ohtap"]
 
 [node name="GUI" type="Control"]
@@ -49,5 +49,17 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "Exit"
 
+[node name="Time" type="Label" parent="MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+text = "time:60"
+
+[node name="Timer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 60.0
+
 [connection signal="pressed" from="MarginContainer/MainMenu/BoxContainer/VBoxContainer/Play" to="." method="_Play"]
 [connection signal="pressed" from="MarginContainer/MainMenu/BoxContainer/VBoxContainer/Exit" to="." method="_Exit"]
+[connection signal="timeout" from="Timer" to="." method="_TimerTimeout"]
