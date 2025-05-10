@@ -43,6 +43,7 @@ public partial class Player : CharacterBody2D
 
 		if (Input.IsActionPressed("ui_down")){
 			ChangeState(PlayerState.lookForward);
+			Position = new Vector2(Position.X,Position.Y + 1);
 		}
 		float direction = Input.GetAxis("ui_left", "ui_right");
 		float targetSpeed = direction * Speed;

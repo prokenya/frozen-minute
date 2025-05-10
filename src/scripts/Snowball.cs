@@ -19,8 +19,8 @@ public partial class Snowball : RigidBody2D
 
 			if (tileData != null)
         		{
-        		    Variant SlipperyVariant = tileData.GetCustomData("icicle");
-        		    int icicleid = (int)SlipperyVariant;
+        		    Variant variant = tileData.GetCustomData("icicle");
+        		    int icicleid = (int)variant;
 					if (icicleid != 0){
 						Body.SetCell(CollidedTileCords);
 						Global.CurrentWorld.SpawnIcicle((Vector2I)Body.MapToLocal(CollidedTileCords),icicleid-1);

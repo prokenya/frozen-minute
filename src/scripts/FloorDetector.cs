@@ -8,11 +8,12 @@ public partial class FloorDetector : Area2D
 	{
 	}
 
-	private void _BodyShapeEntered(Rid BodyRid,TileMapLayer Body,int BodyShapeIndex,int LocalShapeIndex){
+	private void _BodyShapeEntered(Rid BodyRid,Node2D Body,int BodyShapeIndex,int LocalShapeIndex){
 		if (Body is TileMapLayer)
 		{
-			Vector2I CollidedTileCords = Body.GetCoordsForBodyRid(BodyRid);
-			TileData tileData = Body.GetCellTileData(CollidedTileCords);
+			TileMapLayer tilemap = Body as TileMapLayer;
+			Vector2I CollidedTileCords = tilemap.GetCoordsForBodyRid(BodyRid);
+			TileData tileData = tilemap.GetCellTileData(CollidedTileCords);
 
 			if (tileData != null)
         		{
