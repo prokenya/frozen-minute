@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://cmvc06y2047bi"]
+[gd_scene load_steps=12 format=3 uid="uid://cmvc06y2047bi"]
 
 [ext_resource type="Texture2D" uid="uid://bh7dg03k7rf0q" path="res://assets/textures/sprites/penguin.png" id="1_0wdt2"]
 [ext_resource type="Script" uid="uid://b0fvpjajfw065" path="res://src/scripts/Player.cs" id="1_v14g5"]
 [ext_resource type="Script" uid="uid://d2dwk6i4e0d1m" path="res://src/scripts/FloorDetector.cs" id="3_7x01q"]
+[ext_resource type="Texture2D" uid="uid://b7ncmpknjy7r6" path="res://assets/textures/sprites/snowball.png" id="4_qfal1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7x01q"]
 atlas = ExtResource("1_0wdt2")
@@ -48,6 +49,16 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v14g5"]
 size = Vector2(4, 15)
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_gjb54"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(0, -200, 0)
+emission_shape = 3
+emission_box_extents = Vector3(320, 1, 1)
+gravity = Vector3(0, 98, 0)
+scale_min = 0.2
+scale_max = 1.6
+turbulence_enabled = true
+
 [node name="player" type="CharacterBody2D" groups=["player"]]
 texture_filter = 1
 script = ExtResource("1_v14g5")
@@ -81,6 +92,16 @@ shape = SubResource("RectangleShape2D_v14g5")
 [node name="ReloadTimer" type="Timer" parent="."]
 unique_name_in_owner = true
 one_shot = true
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+z_index = 5
+position = Vector2(0, 10)
+amount = 50
+texture = ExtResource("4_qfal1")
+lifetime = 15.0
+preprocess = 32.0
+randomness = 0.25
+process_material = SubResource("ParticleProcessMaterial_gjb54")
 
 [connection signal="timeout" from="CoyoteTimer" to="." method="_CoyoteTimeout"]
 [connection signal="body_shape_entered" from="Area2D" to="Area2D" method="_BodyShapeEntered"]

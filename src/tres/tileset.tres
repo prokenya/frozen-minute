@@ -130,7 +130,6 @@ texture = ExtResource("1_lfr71")
 2:2/0/terrains_peering_bit/top_side = 0
 3:2/0 = 0
 4:2/0 = 0
-4:2/0/physics_layer_1/polygon_0/points = PackedVector2Array(-8, 4, -2.66667, 0, 2.66667, 0, 8, 4, 8, 8, -8, 8)
 0:3/0 = 0
 0:3/0/terrain_set = 0
 0:3/0/terrain = 1

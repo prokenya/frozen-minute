@@ -15,10 +15,13 @@ public partial class Global : Node
 
     public static Gui gui;
 
+    public static Data data = new Data();
+
     public override void _Ready()
     {
         Tree = GetTree();
         GlobalNode = this;
+        data.Load();
     }
     public async Task ChangeWorld(string scenePath,bool WithTransition = true)
     {

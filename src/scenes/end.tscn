@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=4 uid="uid://c446u3oqmbgd1"]
+
+[ext_resource type="Script" uid="uid://dd607jnr5vb43" path="res://src/scripts/End.cs" id="1_v6ll5"]
+[ext_resource type="TileSet" uid="uid://bvl2w0o2wwaiq" path="res://src/tres/BackgroundTileSet.tres" id="2_o1u8y"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o1u8y"]
+size = Vector2(96, 32)
+
+[node name="end" type="Area2D"]
+script = ExtResource("1_v6ll5")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+position = Vector2(0, -24)
+tile_map_data = PackedByteArray("AAABAAEAAAADAAAAAAD+/wEAAAADAAAAAAD//wEAAAACAAAAAAAAAAEAAAAAAAIAAAD9/wEAAAAAAAAAAAD9/wIAAAAAAAAAAAD+/wIAAAABAAAAAAD//wIAAAABAAAAAAAAAAIAAAAAAAAAAAABAAIAAAABAAAAAAACAAIAAAAAAAAAAAACAAEAAAAAAAAAAAA=")
+tile_set = ExtResource("2_o1u8y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 8)
+shape = SubResource("RectangleShape2D_o1u8y")
+
+[connection signal="body_entered" from="." to="." method="_Entered"]

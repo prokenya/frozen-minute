@@ -24,13 +24,14 @@ public partial class Icicle : RigidBody2D
         		{
         		    bool ice = (bool)tileData.GetCustomData("ice");
 					if(ice){
-						// tilemap.SetCell(CollidedTileCords, -1);
-						// tilemap.EraseCell(CollidedTileCords);
 						tilemap.SetCellsTerrainConnect([CollidedTileCords],0,-1,false);
+						Global.CurrentWorld.SpawnOBJ(1,(Vector2I)tilemap.MapToLocal(CollidedTileCords));
+
 						// tilemap.SetCellsTerrainConnect([CollidedTileCords - new Vector2I(1,)],0,-1,true);
 
 					}
 					else{
+						Global.CurrentWorld.SpawnOBJ(1,(Vector2I)tilemap.MapToLocal(CollidedTileCords));
 						QueueFree();
 					}
 					

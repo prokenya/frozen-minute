@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://bt14sn6r2qab2"]
+[gd_scene load_steps=4 format=3 uid="uid://bt14sn6r2qab2"]
 
 [ext_resource type="Theme" uid="uid://0qrpmun6dubf" path="res://src/tres/MainTheme.tres" id="1_gkjl5"]
 [ext_resource type="Script" uid="uid://blaih3he6er5t" path="res://src/scripts/Gui.cs" id="2_ohtap"]
+[ext_resource type="Script" uid="uid://ccxhr6jrbdfxo" path="res://src/scripts/SelctLevel.cs" id="3_xd35q"]
 
 [node name="GUI" type="Control"]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,6 +15,18 @@ grow_vertical = 2
 theme = ExtResource("1_gkjl5")
 script = ExtResource("2_ohtap")
 
+[node name="Time" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -1.0
+offset_bottom = 31.0
+grow_horizontal = 0
+size_flags_horizontal = 8
+size_flags_vertical = 0
+
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -21,41 +35,211 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MainMenu" type="PanelContainer" parent="MarginContainer"]
+[node name="Menus" type="HBoxContainer" parent="MarginContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(150, 40)
 layout_mode = 2
-size_flags_horizontal = 4
 
-[node name="BoxContainer" type="BoxContainer" parent="MarginContainer/MainMenu"]
+[node name="Settings" type="PanelContainer" parent="MarginContainer/Menus"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Menus/Settings"]
+visible = false
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/Menus/Settings"]
+layout_mode = 2
+size_flags_vertical = 3
+columns = 2
+
+[node name="Label" type="Label" parent="MarginContainer/Menus/Settings/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "music"
+
+[node name="musicSpin" type="SpinBox" parent="MarginContainer/Menus/Settings/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+value = 100.0
+
+[node name="SFX" type="Label" parent="MarginContainer/Menus/Settings/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "sfx"
+
+[node name="SFXSpin" type="SpinBox" parent="MarginContainer/Menus/Settings/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+value = 100.0
+
+[node name="MainMenu" type="PanelContainer" parent="MarginContainer/Menus"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(180, 40)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="BoxContainer" type="BoxContainer" parent="MarginContainer/Menus/MainMenu"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MainMenu/BoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Menus/MainMenu/BoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="Play" type="Button" parent="MarginContainer/MainMenu/BoxContainer/VBoxContainer"]
+[node name="Play" type="Button" parent="MarginContainer/Menus/MainMenu/BoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "play"
 
-[node name="Settings" type="Button" parent="MarginContainer/MainMenu/BoxContainer/VBoxContainer"]
+[node name="SettingButtons" type="Button" parent="MarginContainer/Menus/MainMenu/BoxContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
-text = "Settings"
+text = "<Settings>"
 
-[node name="Exit" type="Button" parent="MarginContainer/MainMenu/BoxContainer/VBoxContainer"]
+[node name="CreditsButton" type="Button" parent="MarginContainer/Menus/MainMenu/BoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+text = "Credits"
+
+[node name="Exit" type="Button" parent="MarginContainer/Menus/MainMenu/BoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Exit"
 
-[node name="Time" type="Label" parent="MarginContainer"]
+[node name="Selct Level" type="PanelContainer" parent="MarginContainer/Menus"]
 unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 8
-size_flags_vertical = 0
-text = "time:60"
+script = ExtResource("3_xd35q")
 
-[connection signal="pressed" from="MarginContainer/MainMenu/BoxContainer/VBoxContainer/Play" to="." method="_Play"]
-[connection signal="pressed" from="MarginContainer/MainMenu/BoxContainer/VBoxContainer/Exit" to="." method="_Exit"]
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/Menus/Selct Level"]
+layout_mode = 2
+
+[node name="levels" type="GridContainer" parent="MarginContainer/Menus/Selct Level/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 3
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/Menus/Selct Level/ScrollContainer/levels"]
+layout_mode = 2
+
+[node name="Credits" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Credits"]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="Credits/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Button5" type="Button" parent="Credits/ScrollContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "back"
+
+[node name="LinkButton" type="LinkButton" parent="Credits/ScrollContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(6.44952e-06, 0.585779, 0.770202, 1)
+text = "developer - prokenya"
+uri = "https://prokenya.itch.io/"
+
+[node name="LinkButton2" type="LinkButton" parent="Credits/ScrollContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.533421, 0.824236, 1, 1)
+text = "tester - steena"
+uri = "https://t.me/Stenailay"
+
+[node name="Label5" type="Label" parent="Credits/ScrollContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = " ↓ music  ↓"
+
+[node name="HSeparator5" type="HSeparator" parent="Credits/ScrollContainer/GridContainer"]
+layout_mode = 2
+
+[node name="Button" type="LinkButton" parent="Credits/ScrollContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.171266, 0.459917, 1, 1)
+text = "Snowfall final.mp3 by ShadyDave"
+uri = "https://freesound.org/s/262259/"
+
+[node name="Label" type="Label" parent="Credits/ScrollContainer/GridContainer"]
+layout_mode = 2
+text = "License: Attribution NonCommercial 4.0"
+
+[node name="HSeparator" type="HSeparator" parent="Credits/ScrollContainer/GridContainer"]
+layout_mode = 2
+
+[node name="Button2" type="LinkButton" parent="Credits/ScrollContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.171266, 0.459917, 1, 1)
+text = "sharp smashing ice.wav by cognito perceptu"
+uri = "https://freesound.org/s/267573/"
+
+[node name="Label2" type="Label" parent="Credits/ScrollContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "License: Creative Commons 0"
+
+[node name="HSeparator2" type="HSeparator" parent="Credits/ScrollContainer/GridContainer"]
+layout_mode = 2
+
+[node name="Button3" type="LinkButton" parent="Credits/ScrollContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.171266, 0.459917, 1, 1)
+text = "Lost In a Snow Storm by JoshKeyLowF"
+uri = "https://freesound.org/s/725761/"
+
+[node name="Label3" type="Label" parent="Credits/ScrollContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "License: Attribution NonCommercial 4.0"
+
+[node name="HSeparator3" type="HSeparator" parent="Credits/ScrollContainer/GridContainer"]
+layout_mode = 2
+
+[node name="Button4" type="LinkButton" parent="Credits/ScrollContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.171266, 0.459917, 1, 1)
+text = "Mystical glades piano loop.mp3 by ShadyDave"
+uri = "https://freesound.org/s/333049/"
+
+[node name="Label4" type="Label" parent="Credits/ScrollContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "License: Attribution NonCommercial 4.0"
+
+[node name="HSeparator4" type="HSeparator" parent="Credits/ScrollContainer/GridContainer"]
+layout_mode = 2
+
+[connection signal="value_changed" from="MarginContainer/Menus/Settings/GridContainer/musicSpin" to="." method="_MusicValue"]
+[connection signal="value_changed" from="MarginContainer/Menus/Settings/GridContainer/SFXSpin" to="." method="_SfxValue"]
+[connection signal="pressed" from="MarginContainer/Menus/MainMenu/BoxContainer/VBoxContainer/Play" to="." method="_Play"]
+[connection signal="pressed" from="MarginContainer/Menus/MainMenu/BoxContainer/VBoxContainer/SettingButtons" to="." method="_SettingsPressed"]
+[connection signal="pressed" from="MarginContainer/Menus/MainMenu/BoxContainer/VBoxContainer/CreditsButton" to="." method="_Credits"]
+[connection signal="pressed" from="MarginContainer/Menus/MainMenu/BoxContainer/VBoxContainer/Exit" to="." method="_Exit"]
+[connection signal="pressed" from="Credits/ScrollContainer/GridContainer/Button5" to="." method="_Back"]

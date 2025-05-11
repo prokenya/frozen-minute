@@ -1,15 +1,12 @@
 [gd_scene load_steps=5 format=3 uid="uid://dkji80pq02dt6"]
 
 [ext_resource type="Script" uid="uid://b415blennb218" path="res://src/scripts/Snowball.cs" id="1_dqs3b"]
+[ext_resource type="Texture2D" uid="uid://b7ncmpknjy7r6" path="res://assets/textures/sprites/snowball.png" id="2_yedtp"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_gp2md"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gp2md"]
 radius = 3.0
-
-[sub_resource type="SphereMesh" id="SphereMesh_dqs3b"]
-radius = 3.0
-height = 6.34
 
 [node name="snowball" type="RigidBody2D"]
 collision_layer = 0
@@ -22,7 +19,8 @@ script = ExtResource("1_dqs3b")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_gp2md")
 
-[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
-mesh = SubResource("SphereMesh_dqs3b")
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -0.355)
+texture = ExtResource("2_yedtp")
 
 [connection signal="body_shape_entered" from="." to="." method="_Entered"]

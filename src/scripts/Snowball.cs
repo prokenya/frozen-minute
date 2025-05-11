@@ -23,7 +23,7 @@ public partial class Snowball : RigidBody2D
         		    int icicleid = (int)variant;
 					if (icicleid != 0){
 						Body.SetCell(CollidedTileCords);
-						Global.CurrentWorld.SpawnIcicle((Vector2I)Body.MapToLocal(CollidedTileCords),icicleid-1);
+						Global.CurrentWorld.SpawnOBJ(0,(Vector2I)Body.MapToLocal(CollidedTileCords),icicleid-1);
 						QueueFree();
 					}
 
