@@ -24,7 +24,11 @@ public partial class Icicle : RigidBody2D
         		{
         		    bool ice = (bool)tileData.GetCustomData("ice");
 					if(ice){
-						tilemap.SetCell(CollidedTileCords);
+						// tilemap.SetCell(CollidedTileCords, -1);
+						// tilemap.EraseCell(CollidedTileCords);
+						tilemap.SetCellsTerrainConnect([CollidedTileCords],0,-1,false);
+						// tilemap.SetCellsTerrainConnect([CollidedTileCords - new Vector2I(1,)],0,-1,true);
+
 					}
 					else{
 						QueueFree();
@@ -32,6 +36,9 @@ public partial class Icicle : RigidBody2D
 					
 
 				}
+		}
+		else if (Body.IsInGroup("player")){
+			Global.gui._Exit();
 		}
 		else{
 			QueueFree();

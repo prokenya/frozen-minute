@@ -1,11 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://cmvc06y2047bi"]
+[gd_scene load_steps=10 format=3 uid="uid://cmvc06y2047bi"]
 
 [ext_resource type="Texture2D" uid="uid://bh7dg03k7rf0q" path="res://assets/textures/sprites/penguin.png" id="1_0wdt2"]
 [ext_resource type="Script" uid="uid://b0fvpjajfw065" path="res://src/scripts/Player.cs" id="1_v14g5"]
 [ext_resource type="Script" uid="uid://d2dwk6i4e0d1m" path="res://src/scripts/FloorDetector.cs" id="3_7x01q"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7x01q"]
-size = Vector2(22, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7x01q"]
 atlas = ExtResource("1_0wdt2")
@@ -51,12 +48,14 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v14g5"]
 size = Vector2(4, 15)
 
-[node name="player" type="CharacterBody2D"]
+[node name="player" type="CharacterBody2D" groups=["player"]]
 texture_filter = 1
 script = ExtResource("1_v14g5")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_7x01q")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(0, 2.38419e-07)
+scale = Vector2(1, 1.6)
+polygon = PackedVector2Array(-3, -10, -11, -5.625, -11, -5, -10, 10, 9, 10, 11, 5, 11, -1.49012e-07, 10, -2.5, 3, -10)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 unique_name_in_owner = true
