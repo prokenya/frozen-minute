@@ -17,11 +17,14 @@ public partial class Global : Node
 
     public static Data data = new Data();
 
+    public static string platformName;
+
     public override void _Ready()
     {
         Tree = GetTree();
         GlobalNode = this;
         data.Load();
+        platformName = getOSName();
     }
     public async Task ChangeWorld(string scenePath,bool WithTransition = true)
     {
@@ -41,6 +44,18 @@ public partial class Global : Node
 
 
     }
-
+    public string getOSName(){
+    string platform = OS.GetName();
+	if (platform == "Android"){
+		GD.Print(platform);
+    }
+	else
+        {
+		platform = "PC";
+		GD.Print("PC");
+        }
+    // platform = "Android";
+    return platform;
+    }
 
 }  

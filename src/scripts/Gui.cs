@@ -29,6 +29,11 @@ public partial class Gui : Control
 
 	private SpinBox musicSpin;
 	private SpinBox SFXSpin;
+
+	private HBoxContainer MobileControls;
+	private VBoxContainer MobileUI;
+
+	private HBoxContainer MobileUIButons;
 	public override void _Ready()
 	{
 		Global.gui = this;
@@ -36,6 +41,9 @@ public partial class Gui : Control
 		exit = GetNode<Button>("%Exit");
 		menu = GetNode<PanelContainer>("%MainMenu");
 		Menus = GetNode<HBoxContainer>("%Menus");
+		MobileControls = GetNode<HBoxContainer>("%MobileControls");
+		MobileUIButons = GetNode<HBoxContainer>("%MobileUIButons");
+		MobileUI = GetNode<VBoxContainer>("%MobileUI");
 		transition = GetNode<ColorRect>("%Transition");
 		settings = GetNode<PanelContainer>("%Settings");
 		settingsButton = GetNode<Button>("%SettingButtons");
@@ -50,6 +58,9 @@ public partial class Gui : Control
 		SFXBusIndex = AudioServer.GetBusIndex("SFX");
 		MUSICBusIndex = AudioServer.GetBusIndex("MUSIC");
 		LoadAudioSettings(Global.data.AudioBusVolume);
+		if (Global.platformName == "PC"){
+			MobileUI.Visible = false;
+		}
 	}
 	public void _Play(){
 		_Play(0);
@@ -61,6 +72,7 @@ public partial class Gui : Control
 		Menus.Hide();
 		play.Hide();
 		Global.gui.Menus.Hide();
+		MobileControls.Show();
 		await Global.GlobalNode.ChangeWorld(levelsPaths[Index],false);
 		await SetTransition(false,1);
 	}
@@ -86,6 +98,7 @@ public partial class Gui : Control
 	{
 	    if (Input.IsActionJustPressed("ui_cancel")){
 			Menus.Visible = !Menus.Visible;
+			MobileControls.Visible = !MobileControls.Visible;
 			Global.Main.IsFreezed = Menus.Visible;
 		}
 	}
@@ -103,6 +116,7 @@ public partial class Gui : Control
 	private void _SettingsPressed(){
 		settings.Visible = !settings.Visible;
 		selectlevel.Visible = !selectlevel.Visible;
+		MobileUIButons.Visible = !settings.Visible;
 		if (selectlevel.Visible){
 			settingsButton.Text = ">Settings<";
 
@@ -127,8 +141,8 @@ public partial class Gui : Control
 	}
 	private void _Back(){
 		menu.Show();
-		settings.Show();
-		selectlevel.Show();
+		settings.Hide();
+		selectlevel.Hide();
 		Credits.Hide();
 	}
 	private void SetAudioVolume(int busID, float Value) {

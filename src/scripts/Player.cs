@@ -76,17 +76,68 @@ public partial class Player : CharacterBody2D
 		HandleAnimation();
 	}
 
-    public override void _Input(InputEvent @event)
-    {
-        base._Input(@event);
-		if (Input.IsActionJustPressed("LeftMouse") && ReloadTimer.IsStopped()){
-			ThrowSnowball();
-			ReloadTimer.Start();
+	public override void _Input(InputEvent @event)
+	{
+	    base._Input(@event);
+
+	    if (!ReloadTimer.IsStopped())
+	        return;
+
+	    if (Global.platformName == "PC")
+	    {
+	        HandlePCInput();
+	    }
+	    else
+	    {
+	        HandleMobileInput(@event);
+	    }
+	}
+
+	private void HandlePCInput()
+	{
+	    if (Input.IsActionJustPressed("LeftMouse"))
+	    {
+	        Vector2 worldPos = GetGlobalMousePosition();
+	        ThrowSnowball(worldPos);
+	        ReloadTimer.Start();
+	    }
+	}
+
+	private async void HandleMobileInput(InputEvent @event)
+	{
+        await ToSignal(GetTree(), "process_frame");
+		if (Input.IsActionJustPressed("ui_right") || 
+		Input.IsActionJustPressed("ui_left") || 
+		Input.IsActionJustPressed("ui_accept") || 
+		Input.IsActionJustPressed("ui_down"))
+		{
+		    return;
 		}
-    }
-	public void ThrowSnowball(){
-		Vector2 ScreenCenter = GetViewport().GetVisibleRect().Size / 2;
-		Vector2 MousePosition = GetGlobalMousePosition();
+	    if (@event is InputEventScreenTouch touch && touch.Pressed)
+	    {
+	        Vector2 worldPos;
+	        Camera2D cam = GetViewport().GetCamera2D();
+
+	        if (cam != null)
+	        {
+	            Transform2D inv = cam.GetCanvasTransform().AffineInverse();
+	            worldPos = inv * touch.Position;
+	        }
+	        else
+	        {
+	            worldPos = touch.Position;
+	        }
+
+	        ThrowSnowball(worldPos);
+	        ReloadTimer.Start();
+	    }
+	}
+
+
+
+	
+	public void ThrowSnowball(Vector2 MousePosition){
+		// Vector2 ScreenCenter = GetViewport().GetVisibleRect().Size / 2;
 		Vector2 Direction = -(GlobalPosition - MousePosition).Normalized();
 		Snowball instance = (Snowball)scene.Instantiate();
 		instance.LinearVelocity = Direction * 500;
