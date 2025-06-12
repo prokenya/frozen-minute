@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bt14sn6r2qab2"]
+[gd_scene load_steps=10 format=3 uid="uid://bt14sn6r2qab2"]
 
 [ext_resource type="Theme" uid="uid://0qrpmun6dubf" path="res://src/tres/MainTheme.tres" id="1_gkjl5"]
 [ext_resource type="Script" uid="uid://blaih3he6er5t" path="res://src/scripts/Gui.cs" id="2_ohtap"]
@@ -6,6 +6,259 @@
 [ext_resource type="Script" uid="uid://5pxbu4tgovkk" path="res://src/scripts/MobileControls.cs" id="4_8kaot"]
 [ext_resource type="Texture2D" uid="uid://c0bv1o2wfj8f7" path="res://assets/textures/ui/arrow.png" id="4_dqxq8"]
 [ext_resource type="Texture2D" uid="uid://c28k2js47c46i" path="res://assets/textures/ui/arrowDown.png" id="5_qv1ub"]
+
+[sub_resource type="Animation" id="Animation_8kaot"]
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/Menus/Settings:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MarginContainer/Menus/Selct Level:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MarginContainer/Menus/Settings:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("MarginContainer/Menus/Selct Level:self_modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("MarginContainer/Menus/Settings/NinePatchRect:patch_margin_left")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [200]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("MarginContainer/Menus/Selct Level/NinePatchRect:patch_margin_left")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [200]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("MarginContainer/Menus/Settings/GridContainer:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("MarginContainer/Menus/Settings/GridContainer:modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("MarginContainer/Menus/Selct Level/ScrollContainer:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("MarginContainer/Menus/Selct Level/ScrollContainer:modulate")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_fgixc"]
+resource_name = "ShowSettings"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/Menus/Settings:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.001),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MarginContainer/Menus/Selct Level:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.001),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MarginContainer/Menus/Settings:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("MarginContainer/Menus/Selct Level:self_modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("MarginContainer/Menus/Settings/NinePatchRect:patch_margin_left")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 200]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("MarginContainer/Menus/Selct Level/NinePatchRect:patch_margin_left")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 200]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("MarginContainer/Menus/Settings/GridContainer:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(1, 1.03333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("MarginContainer/Menus/Settings/GridContainer:modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(1, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("MarginContainer/Menus/Selct Level/ScrollContainer:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(1, 1.03333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("MarginContainer/Menus/Selct Level/ScrollContainer:modulate")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(1, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_23ncy"]
+_data = {
+&"RESET": SubResource("Animation_8kaot"),
+&"ShowSettings": SubResource("Animation_fgixc")
+}
 
 [node name="GUI" type="Control"]
 process_mode = 3
@@ -163,15 +416,13 @@ layout_mode = 2
 [node name="Settings" type="PanelContainer" parent="MarginContainer/Menus"]
 unique_name_in_owner = true
 visible = false
-custom_minimum_size = Vector2(200, 0)
+self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Menus/Settings"]
-visible = false
-layout_mode = 2
-
 [node name="GridContainer" type="GridContainer" parent="MarginContainer/Menus/Settings"]
+visible = false
+modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_vertical = 3
 columns = 2
@@ -197,6 +448,10 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 8
 value = 100.0
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer/Menus/Settings"]
+layout_mode = 2
+patch_margin_left = 200
 
 [node name="MainMenu" type="PanelContainer" parent="MarginContainer/Menus"]
 unique_name_in_owner = true
@@ -241,12 +496,14 @@ text = "Exit"
 [node name="Selct Level" type="PanelContainer" parent="MarginContainer/Menus"]
 unique_name_in_owner = true
 visible = false
-custom_minimum_size = Vector2(200, 0)
+self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 8
 script = ExtResource("3_xd35q")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/Menus/Selct Level"]
+visible = false
+modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 
 [node name="levels" type="GridContainer" parent="MarginContainer/Menus/Selct Level/ScrollContainer"]
@@ -257,6 +514,10 @@ size_flags_vertical = 3
 
 [node name="HSeparator" type="HSeparator" parent="MarginContainer/Menus/Selct Level/ScrollContainer/levels"]
 layout_mode = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer/Menus/Selct Level"]
+layout_mode = 2
+patch_margin_left = 200
 
 [node name="Credits" type="PanelContainer" parent="."]
 unique_name_in_owner = true
@@ -361,6 +622,13 @@ text = "License: Attribution NonCommercial 4.0"
 
 [node name="HSeparator4" type="HSeparator" parent="Credits/ScrollContainer/GridContainer"]
 layout_mode = 2
+
+[node name="GUIanimations" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_23ncy")
+}
+speed_scale = 2.0
 
 [connection signal="pressed" from="MarginContainer/MobileUI/CanvasLayer/MobileUIButons/Menubutton" to="MarginContainer/MobileUI/MobileControls" method="_Back"]
 [connection signal="button_down" from="MarginContainer/MobileUI/MobileControls/Left" to="MarginContainer/MobileUI/MobileControls" method="_LeftDown"]

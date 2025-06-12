@@ -34,6 +34,16 @@ public partial class Gui : Control
 	private VBoxContainer MobileUI;
 
 	private HBoxContainer MobileUIButons;
+
+	private AnimationPlayer GUIanimations;
+	private enum GUIAnimationState
+	{
+		Menu,
+		Settings,
+		Credits
+	
+	}
+	private GUIAnimationState CurrentAnimationState = GUIAnimationState.Menu;
 	public override void _Ready()
 	{
 		Global.gui = this;
@@ -53,13 +63,17 @@ public partial class Gui : Control
 
 		time = GetNode<Label>("%Time");
 
+		GUIanimations = GetNode<AnimationPlayer>("%GUIanimations");
+
 		SFXSpin = GetNode<SpinBox>("%SFXSpin");
 		musicSpin = GetNode<SpinBox>("%musicSpin");
 		SFXBusIndex = AudioServer.GetBusIndex("SFX");
 		MUSICBusIndex = AudioServer.GetBusIndex("MUSIC");
 		LoadAudioSettings(Global.data.AudioBusVolume);
-		if (Global.platformName == "PC"){
+		if (Global.platformName == "PC")
+		{
 			MobileUI.Visible = false;
+			MobileUIButons.Visible = false;
 		}
 	}
 	public void _Play(){
@@ -77,14 +91,15 @@ public partial class Gui : Control
 		await SetTransition(false,1);
 	}
 
-	public async Task SetTransition(bool Start,double duration = 1){
+	public async Task SetTransition(bool Start,double duration = 1,string color = "#000000")
+	{
 		if (_tween != null){
         	_tween.Kill();
 		}
    		_tween = CreateTween();
 		if (Start){
 			transition.Show();
-			_tween.TweenProperty(transition,"color",new Color("#000000"),duration);
+			_tween.TweenProperty(transition,"color",new Color(color),duration);
 			await ToSignal(_tween, Tween.SignalName.Finished);
 		}
 		else{
@@ -114,9 +129,21 @@ public partial class Gui : Control
 	}
 
 	private void _SettingsPressed(){
-		settings.Visible = !settings.Visible;
-		selectlevel.Visible = !selectlevel.Visible;
-		MobileUIButons.Visible = !settings.Visible;
+		if (CurrentAnimationState == GUIAnimationState.Settings)
+		{
+			GUIanimations.PlayBackwards("ShowSettings");
+			CurrentAnimationState = GUIAnimationState.Menu;
+		}
+		else
+		{
+			GUIanimations.Play("ShowSettings");
+			CurrentAnimationState = GUIAnimationState.Settings;
+
+		}
+		if (MobileUI.Visible)
+		{
+			MobileUIButons.Visible = !MobileUIButons.Visible;
+		}
 		if (selectlevel.Visible){
 			settingsButton.Text = ">Settings<";
 

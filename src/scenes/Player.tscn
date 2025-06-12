@@ -1,25 +1,38 @@
-[gd_scene load_steps=12 format=3 uid="uid://cmvc06y2047bi"]
+[gd_scene load_steps=16 format=3 uid="uid://cmvc06y2047bi"]
 
 [ext_resource type="Texture2D" uid="uid://bh7dg03k7rf0q" path="res://assets/textures/sprites/penguin.png" id="1_0wdt2"]
 [ext_resource type="Script" uid="uid://b0fvpjajfw065" path="res://src/scripts/Player.cs" id="1_v14g5"]
 [ext_resource type="Script" uid="uid://d2dwk6i4e0d1m" path="res://src/scripts/FloorDetector.cs" id="3_7x01q"]
+[ext_resource type="Texture2D" uid="uid://csxfersk4etcg" path="res://assets/textures/sprites/penguinExt.png" id="3_gjb54"]
 [ext_resource type="Texture2D" uid="uid://b7ncmpknjy7r6" path="res://assets/textures/sprites/snowball.png" id="4_qfal1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7x01q"]
 atlas = ExtResource("1_0wdt2")
 region = Rect2(0, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qfal1"]
-atlas = ExtResource("1_0wdt2")
-region = Rect2(32, 0, 32, 32)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_gjb54"]
-atlas = ExtResource("1_0wdt2")
-region = Rect2(64, 0, 32, 32)
+atlas = ExtResource("3_gjb54")
+region = Rect2(128, 0, 32, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8qsgd"]
+atlas = ExtResource("3_gjb54")
+region = Rect2(64, 0, 32, 36)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1g466"]
-atlas = ExtResource("1_0wdt2")
-region = Rect2(96, 0, 32, 32)
+atlas = ExtResource("3_gjb54")
+region = Rect2(32, 0, 32, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uo3qh"]
+atlas = ExtResource("3_gjb54")
+region = Rect2(64, 0, 32, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5fxyq"]
+atlas = ExtResource("3_gjb54")
+region = Rect2(96, 0, 32, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5qe72"]
+atlas = ExtResource("3_gjb54")
+region = Rect2(128, 0, 32, 36)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_uo3qh"]
 animations = [{
@@ -33,13 +46,27 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_qfal1")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_gjb54")
 }, {
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_8qsgd")
+}],
+"loop": true,
+"name": &"Jump",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_1g466")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uo3qh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5fxyq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5qe72")
 }],
 "loop": true,
 "name": &"Walk",
@@ -75,8 +102,11 @@ position_smoothing_speed = 1.0
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
 texture_filter = 1
+position = Vector2(0, -0.765)
 sprite_frames = SubResource("SpriteFrames_uo3qh")
 animation = &"Walk"
+frame = 2
+frame_progress = 0.959904
 
 [node name="CoyoteTimer" type="Timer" parent="."]
 unique_name_in_owner = true
@@ -103,5 +133,14 @@ preprocess = 32.0
 randomness = 0.25
 process_material = SubResource("ParticleProcessMaterial_gjb54")
 
+[node name="IcicleArea" type="Area2D" parent="."]
+collision_mask = 4
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="IcicleArea"]
+position = Vector2(0, 2.38419e-07)
+scale = Vector2(1, 1.6)
+polygon = PackedVector2Array(-3, -10, -11, -5.625, -11, -5, -10, 10, 9, 10, 11, 5, 11, -1.49012e-07, 10, -2.5, 3, -10)
+
 [connection signal="timeout" from="CoyoteTimer" to="." method="_CoyoteTimeout"]
 [connection signal="body_shape_entered" from="Area2D" to="Area2D" method="_BodyShapeEntered"]
+[connection signal="body_entered" from="IcicleArea" to="." method="_IcicleEntered"]
